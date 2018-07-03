@@ -3,11 +3,17 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { MainComponent } from './main/main.component';
+import { SpellListComponent } from './spell-list/spell-list.component';
+import { SpellCardComponent } from './spell-card/spell-card.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainComponent,
+    SpellListComponent,
+    SpellCardComponent
   ],
   imports: [
     BrowserModule
