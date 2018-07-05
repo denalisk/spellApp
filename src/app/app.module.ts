@@ -12,6 +12,7 @@ import { HttpModule } from '@angular/http';
 import { SpellItemComponent } from './spell-item/spell-item.component';
 import { LevelTextPipe } from './pipes/level-text.pipe';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { FilterComponent } from './filter/filter.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SpellCardComponent,
     SpellItemComponent,
     LevelTextPipe,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
