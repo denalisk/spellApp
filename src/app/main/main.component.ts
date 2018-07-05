@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SpellService } from '../services/spell.service';
 import { Spell, PreSpell } from '../models/spell.interface';
+import { FilterFacet } from '../services/filter.service';
+import { FilterGroups } from '../constants/filterValues';
 
 @Component({
   selector: 'app-main',
@@ -11,6 +13,8 @@ export class MainComponent implements OnInit {
   public spells: Spell[];
   public preSpells: PreSpell[];
   public selectedSpell: Spell;
+  
+  public filterGroups: FilterFacet[][] = FilterGroups;
 
   constructor(private spellService: SpellService) { }
 

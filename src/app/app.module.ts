@@ -13,6 +13,7 @@ import { SpellItemComponent } from './spell-item/spell-item.component';
 import { LevelTextPipe } from './pipes/level-text.pipe';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { FilterComponent } from './filter/filter.component';
+import { SelectTagComponent } from './select-tag/select-tag.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FilterComponent } from './filter/filter.component';
     SpellItemComponent,
     LevelTextPipe,
     ClickOutsideDirective,
-    FilterComponent
+    FilterComponent,
+    SelectTagComponent
   ],
   imports: [
     BrowserModule,

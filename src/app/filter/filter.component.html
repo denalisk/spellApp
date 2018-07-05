@@ -1,3 +1,7 @@
-<p>
-  filter works!
-</p>
+<div>
+  <div *ngFor="let filterGroups of filterGroups">
+    <div *ngFor="let filter of filterGroups">
+      {{ filter.displayName }}
+    </div>
+  </div>
+</div>
