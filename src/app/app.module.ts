@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { SpellListComponent } from './spell-list/spell-list.component';
 import { SpellCardComponent } from './spell-card/spell-card.component';
+import { routing } from './app.routing';
+import { SpellService } from './services/spell.service';
+import { HttpModule } from '@angular/http';
+import { SpellItemComponent } from './spell-item/spell-item.component';
 
 
 @NgModule({
@@ -13,12 +17,19 @@ import { SpellCardComponent } from './spell-card/spell-card.component';
     AppComponent,
     MainComponent,
     SpellListComponent,
-    SpellCardComponent
+    SpellCardComponent,
+    SpellItemComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    routing,
+    HttpModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    SpellService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
