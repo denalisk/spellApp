@@ -5,5 +5,12 @@
 <button (click)="test()">Test 1</button>
 <button (click)="clean()">Cleanup</button>
 
-<app-spell-card></app-spell-card>
+<div *ngFor="let spell of spells">
+    <app-spell-item [spell]="spell"></app-spell-item>
+</div>
+
+<!-- <div *ngIf="selectedSpell">
+    <app-spell-card [spell]="selectedSpell"></app-spell-card>
+    <app-spell-item [spell]="selectedSpell"></app-spell-item>
+</div> -->
 <app-spell-list></app-spell-list>

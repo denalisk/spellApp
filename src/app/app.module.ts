@@ -10,6 +10,8 @@ import { routing } from './app.routing';
 import { SpellService } from './services/spell.service';
 import { HttpModule } from '@angular/http';
 import { SpellItemComponent } from './spell-item/spell-item.component';
+import { LevelTextPipe } from './pipes/level-text.pipe';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { SpellItemComponent } from './spell-item/spell-item.component';
     MainComponent,
     SpellListComponent,
     SpellCardComponent,
-    SpellItemComponent
+    SpellItemComponent,
+    LevelTextPipe,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,

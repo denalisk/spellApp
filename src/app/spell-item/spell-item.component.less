@@ -1,0 +1,22 @@
+@import (reference) "../../less/variables.less";
+
+.spell-item {
+    // background: @color-gray;
+    border: 1px solid @color-gray;
+}
+
+.list-bar {
+    background: @color-orange;
+    padding: 10px;
+    justify-content: space-between;
+    & > div {
+        padding: 10px 10px;
+        &:not(:last-child) {
+            border-right: 1px solid @color-black;
+        }
+    }
+
+}
+.expanded-text {
+    padding: 0 10px 10px;
+}
