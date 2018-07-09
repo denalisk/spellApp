@@ -14,6 +14,7 @@ import { LevelTextPipe } from './pipes/level-text.pipe';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { FilterComponent } from './filter/filter.component';
 import { SelectTagComponent } from './select-tag/select-tag.component';
+import { FilterService } from './services/filter.service';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { SelectTagComponent } from './select-tag/select-tag.component';
     HttpModule
   ],
   providers: [
-    SpellService
+    SpellService,
+    FilterService
   ],
   bootstrap: [
     AppComponent

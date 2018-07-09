@@ -5,11 +5,11 @@
 <app-filter [filterGroups]="filterGroups"></app-filter>
 
 <br>
-<br><br>
-<br><br><br>
 
 <button (click)="test()">Test 1</button>
 <button (click)="clean()">Cleanup</button>
+
+<br>
 
 <div *ngFor="let spell of spells">
     <app-spell-item [spell]="spell"></app-spell-item>

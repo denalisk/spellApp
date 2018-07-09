@@ -4,7 +4,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
-import { Spell, PreSpell } from '../models/spell.interface';
+import { Spell } from '../models/spell.interface';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -12,9 +12,14 @@ export class SpellService {
 
   constructor(private http: Http) { }
 
-  public getAllPreSpells(): Observable<Spell[]> {
+  public getAllPreSpells<T>(endpoint: string): Observable<T[]> {
+    return this.http.get('http://localhost:3000/' + endpoint)
+    .map(response => response.json() as T[]);
+  }
+
+  public getAllSpells(): Promise<Spell[]> {
     return this.http.get('http://localhost:3000/spells')
-    .map(response => response.json() as Spell[]);
+    .map(response => response.json() as Spell[]).toPromise();
   }
 
   public updateSpell(spell: Spell): Promise<void> {

@@ -1,39 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SpellService } from '../services/spell.service';
 import { Spell, PreSpell } from '../models/spell.interface';
-import { FilterFacet } from '../services/filter.service';
 import { FilterGroups } from '../constants/filterValues';
+import { FilterFacet } from '../models/filter-facet';
+import { FilterService } from '../services/filter.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.less']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
   public spells: Spell[];
   public preSpells: PreSpell[];
   public selectedSpell: Spell;
   
   public filterGroups: FilterFacet[][] = FilterGroups;
 
-  constructor(private spellService: SpellService) { }
+  constructor(private spellService: SpellService, private filterService: FilterService) { }
 
   ngOnInit() {
-    this.spellService.getAllPreSpells().subscribe(response => {
+    this.spellService.getAllPreSpells<PreSpell>('data').subscribe(response => {
+      console.log('Pre Spells initialized');
+      this.preSpells = response;
+    });
+    this.filterService.currentSpells
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((spells: Spell[]) => {
+        this.spells = spells;
+      })
+  }
+
+  private ngUnsubscribe: Subject<void> = new Subject();
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  public test() {
+    this.spellService.getAllPreSpells<PreSpell>('data').subscribe(response => {
       console.log(response);
-      this.spells = response;
+      this.preSpells = response;
       this.selectedSpell = this.spells[0];
     });
   }
 
-  public test() {
-    this.spellService.getAllPreSpells().subscribe(response => {
-      console.log(response);
-      this.spells = response;
-    })
-  }
-
-  public clean() {
+  public async clean() {
     const preSpells = this.preSpells;
     for (let i = 0; i < preSpells.length; i++) {
       const currentSpell = preSpells[i];
@@ -44,6 +57,9 @@ export class MainComponent implements OnInit {
       const mappedSpell = this.buildSpellFromPreSpell(currentSpell);
 
       this.spellService.updateSpell(mappedSpell);
+      if ((i % 10) == 0) {
+        await this.sleep(1000);
+      }
     }
   }
 
@@ -73,6 +89,10 @@ export class MainComponent implements OnInit {
       return 0;
     }
     return parseInt(levelString[0]);
+  }
+
+  public sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   public MOCKSPELL = {
