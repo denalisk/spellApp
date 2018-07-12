@@ -15,6 +15,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { FilterComponent } from './filter/filter.component';
 import { SelectTagComponent } from './select-tag/select-tag.component';
 import { FilterService } from './services/filter.service';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { FilterService } from './services/filter.service';
     LevelTextPipe,
     ClickOutsideDirective,
     FilterComponent,
-    SelectTagComponent
+    SelectTagComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,

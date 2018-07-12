@@ -19,7 +19,11 @@ export class SpellService {
 
   public getAllSpells(): Promise<Spell[]> {
     return this.http.get('http://localhost:3000/spells')
-    .map(response => response.json() as Spell[]).toPromise();
+    .map(response => {
+      let spells = response.json() as Spell[];
+      this.sortSpells(spells);
+      return spells;
+    }).toPromise();
   }
 
   public updateSpell(spell: Spell): Promise<void> {
@@ -35,6 +39,28 @@ export class SpellService {
     });
 
     return options;
+  }
+
+  /**
+   * always sort spells by level and then alphabetically
+   */
+  private sortSpells(spells: Spell[]): void {
+    console.log("Sorting");
+    spells.sort((spellA, spellB) => {
+      if (spellA.level - spellB.level === 0) {
+        const nameA = spellA.name.toUpperCase();
+        const nameB = spellB.name.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        } else if (nameA > nameB) {
+          return 1;
+        } else {
+          return 0;
+        }
+      } else {
+        return spellA.level - spellB.level;
+      }
+    })
   }
 
 }

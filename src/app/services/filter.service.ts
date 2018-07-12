@@ -5,6 +5,7 @@ import { FilterFacet } from '../models/filter-facet';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { SpellService } from './spell.service';
 import { Observable } from 'rxjs/Observable';
+import { SpellCardComponent } from '../spell-card/spell-card.component';
 
 @Injectable()
 export class FilterService {
@@ -91,10 +92,6 @@ export class FilterService {
         return false;
       }
     }
-  }
-
-  private sortSpells(spells: Spell[]): void {
-    
   }
 
   // public generateFilters(spells: Spell[]): FilterFacet[] {

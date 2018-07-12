@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Spell } from '../models/spell.interface';
 
 @Component({
   selector: 'app-spell-list',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./spell-list.component.less']
 })
 export class SpellListComponent implements OnInit {
+  @Input() spells: Spell[];
 
   constructor() { }
 

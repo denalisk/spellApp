@@ -3,24 +3,32 @@
     <div class="flex-0">
       {{ spell.level | levelText }}
     </div>
-    <div class="flex-1">
+    <div class="">
       {{ spell.name }}
     </div>
-    <div *ngIf="spell.castingTime" class="flex-1">
-      {{ spell.castingTime }}
+    <div *ngIf="spell.description" class="" [class.truncate]="!spellDescriptionIsShown">
+      <div [innerHTML]="spell.description | safeHtml"></div>
     </div>
-    <div *ngIf="spell.range" class="flex-1">
-      Range: {{ spell.range }}
-    </div>
+    <!--     
+      <div *ngIf="spell.range" class="flex-1">
+        Range: {{ spell.range }}
+      </div>
     <div *ngIf="spell.duration" class="flex-1">
       Duration: {{ spell.duration }}
     </div>
     <div *ngIf="spell.concentration" class="flex-1">
-      Concentration: {{ spell.concentration }}
+      Concentration: {{ spell.concentration }} 
     </div>
+  -->
   </div>
   <div *ngIf="spellDescriptionIsShown" class="expanded-text">
-    <div *ngIf="spell.description" [innerHTML]="spell.description"></div>
-    <div *ngIf="spell.higherLevel" [innerHTML]="spell.higherLevel"></div>
+    <div *ngIf="spell.higherLevel" [innerHTML]="spell.higherLevel | safeHtml">
+
+    </div>
   </div>
+  <!-- 
+    <div *ngIf="spell.castingTime" class="flex-1">
+      {{ spell.castingTime }}
+    </div>
+   -->
 </div>

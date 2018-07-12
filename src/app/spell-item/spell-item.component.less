@@ -1,19 +1,51 @@
 @import (reference) "../../less/variables.less";
 
 .spell-item {
-    // background: @color-gray;
-    border: 1px solid @color-gray;
+    // background: @color-light;
+    border: 1px solid @color-light;
 }
 
 .list-bar {
-    background: @color-orange;
+    background: @color-main;
+    color: @color-light;
     padding: 10px;
-    justify-content: space-between;
+    justify-content: flex-start;
+    height: 100px;
+    overflow: hidden;
     & > div {
         padding: 10px 10px;
         &:not(:last-child) {
-            border-right: 1px solid @color-black;
+            border-right: 1px solid @color-dark;
         }
+        &:nth-child(1) {
+            width: 80px;
+        }
+        &:nth-child(2) {
+            width: 240px;
+        }
+        &:nth-child(3) {
+            width: ~"calc(100% - 320px)";
+            // min-width: 280px;
+        }
+        // &:nth-child(4) {
+        //     width: 20%;
+        // }
+        // &:nth-child(5) {
+        //     width: 10%;
+        // }
+        // &:nth-child(2) {
+        //     width: 20%;
+        //     min-width: 280px;
+        // }
+        // &:nth-child(3) {
+        //     width: 10%;
+        // }
+        // &:nth-child(4) {
+        //     width: 20%;
+        // }
+        // &:nth-child(5) {
+        //     width: 10%;
+        // }
     }
 
 }
