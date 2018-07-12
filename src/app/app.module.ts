@@ -17,6 +17,7 @@ import { SelectTagComponent } from './select-tag/select-tag.component';
 import { FilterService } from './services/filter.service';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { SearchComponent } from './search/search.component';
+import { TabStateService } from './services/tab-state.service';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { SearchComponent } from './search/search.component';
   ],
   providers: [
     SpellService,
-    FilterService
+    FilterService,
+    TabStateService
   ],
   bootstrap: [
     AppComponent

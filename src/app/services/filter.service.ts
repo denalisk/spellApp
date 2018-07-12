@@ -59,6 +59,16 @@ export class FilterService {
     }
   }
 
+  public removeFromSavedSpells(spell: Spell): void {
+    if (this.sourceState === SavedSpellState) {
+      const foundIndex = this.savedSpells.findIndex(targetSpell => targetSpell.id === spell.id);
+      if (foundIndex > -1) {
+        this.savedSpells.splice(foundIndex, 1);
+        this.updateFilters(this.currentFiltersSubject.value);
+      }
+    }
+  }
+
   public addFilter(filter: FilterFacet): void {
     const currentFilters = this.currentFiltersSubject.value;
     currentFilters.push(filter)

@@ -1,5 +1,5 @@
 <div *ngFor="let spell of spells" class="list-item">
-  <app-spell-item [spell]="spell" (spellSaved)="addSpellToSaved(spell)"></app-spell-item>
+  <app-spell-item [spell]="spell" [tabState]="tabState" (spellSaved)="toggleSpellToSaved(spell)"></app-spell-item>
 </div>
 <div *ngIf="spells.length === 0" class="flex-row flex-align flex-center">
   <br>

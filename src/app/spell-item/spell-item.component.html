@@ -6,7 +6,7 @@
     <div [class.selected]="spellDescriptionIsShown">
       <strong>{{ spell.name }}</strong>
       <div *ngIf="spellDescriptionIsShown">
-        <i class="fa fa-plus-square fa-lg" title="Add this spell to your saved spells" (click)="addSpellToSaved($event)"></i>
+        <i [ngClass]="(tabState === allSpellState) ? 'fa fa-plus-square fa-lg' : 'fa fa-minus-square fa-lg'" title="manage your saved spells" (click)="toggleSpellToSaved($event)"></i>
       </div>
     </div>
   </div>
