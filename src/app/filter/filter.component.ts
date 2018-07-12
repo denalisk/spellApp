@@ -39,10 +39,12 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   public hideFilters(): void {
     this.filtersAreShown = false;
+    console.log("hiding");
   }
 
   public toggleFilterView(): void {
     this.filtersAreShown = !this.filtersAreShown;
+    console.log("toggling");
   }
 
   public toggleFilter(selectedFilter: FilterFacet): void {
@@ -52,6 +54,10 @@ export class FilterComponent implements OnInit, OnDestroy {
       this.filterService.removeFilter(selectedFilter);
     }
     console.log(this.currentFilters);
+  }
+
+  public removeFilter(selectedFilter: FilterFacet): void {
+    this.filterService.removeFilter(selectedFilter);
   }
 
   public deselectFilters(): void {
@@ -79,7 +85,21 @@ export class FilterComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .subscribe((filters: FilterFacet[]) => {
         this.currentFilters = filters;
+        this.updateHighlights(this.currentFilters);
       });
+  }
+
+  private updateHighlights(currentFilters: FilterFacet[]): void {
+    this.filterGroups.forEach(group => {
+      group.forEach(filter => {
+        const foundFilter = currentFilters.find(x => x.propertyValue == filter.propertyValue);
+        if (foundFilter) {
+          filter.selected = true;
+        } else {
+          filter.selected = false;
+        }
+      })
+    })
   }
 
 }

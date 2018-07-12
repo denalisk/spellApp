@@ -5,6 +5,7 @@ import { FilterGroups } from '../constants/filterValues';
 import { FilterFacet } from '../models/filter-facet';
 import { FilterService } from '../services/filter.service';
 import { Subject } from 'rxjs/Subject';
+import { AllSpellState, SavedSpellState } from '../constants/stateNames';
 
 @Component({
   selector: 'app-main',
@@ -13,12 +14,20 @@ import { Subject } from 'rxjs/Subject';
 })
 export class MainComponent implements OnInit, OnDestroy {
   public spells: Spell[];
+  public savedSpells: Spell[];
   public preSpells: PreSpell[];
   public selectedSpell: Spell;
+
+  //Tab States
+  public allSpellState = AllSpellState;
+  public savedSpellState = SavedSpellState;
+  public currentTabState = AllSpellState;
   
   public filterGroups: FilterFacet[][] = FilterGroups;
 
-  constructor(private spellService: SpellService, private filterService: FilterService) { }
+  constructor(private spellService: SpellService, private filterService: FilterService) { 
+    this.savedSpells = [];
+  }
 
   ngOnInit() {
     this.spellService.getAllPreSpells<PreSpell>('data').subscribe(response => {
@@ -36,6 +45,16 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  public saveSpell(spell: Spell): void {
+    this.filterService.addToSavedSpells(spell);
+  }
+
+  public setTab(newTab: string): void {
+    this.currentTabState = newTab;
+    console.log("STAET", newTab);
+    this.filterService.toggleSpellSource(this.currentTabState);
   }
 
   public test() {

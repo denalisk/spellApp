@@ -1,19 +1,15 @@
-<p>
-  main works!
-</p>
-<i class="fa fa-envelope-open"></i>
+<div>
 
+</div>
+<app-search></app-search>
 <app-filter [filterGroups]="filterGroups"></app-filter>
 
-<br>
-
-<button (click)="test()">Test 1</button>
-<button (click)="clean()">Cleanup</button>
-
-<br>
-
-<!-- <div *ngIf="selectedSpell">
-    <app-spell-card [spell]="selectedSpell"></app-spell-card>
-    <app-spell-item [spell]="selectedSpell"></app-spell-item>
-</div> -->
-<app-spell-list [spells]="spells"></app-spell-list>
+<div class="flex-row header-tabs">
+  <div class="tab" [class.selected]="currentTabState === allSpellState" (click)="setTab(allSpellState)">
+    Spell List
+  </div>
+  <div class="tab" [class.selected]="currentTabState === savedSpellState" (click)="setTab(savedSpellState)">
+    Saved Spells
+  </div>
+</div>
+<app-spell-list [spells]="spells" (spellSaved)="saveSpell($event)"></app-spell-list>

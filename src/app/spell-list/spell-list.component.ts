@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Spell } from '../models/spell.interface';
 
 @Component({
@@ -8,10 +8,15 @@ import { Spell } from '../models/spell.interface';
 })
 export class SpellListComponent implements OnInit {
   @Input() spells: Spell[];
+  @Output() spellSaved: EventEmitter<Spell> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public addSpellToSaved(spell: Spell): void {
+    this.spellSaved.emit(spell);
   }
 
 }

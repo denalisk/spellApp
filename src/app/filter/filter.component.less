@@ -1,6 +1,28 @@
+
+@import (reference) "../../less/variables.less";
+
 .tag-item {
     margin: 5px;
-    &:first-child {
-        margin-left: 0;
-    }
+}
+
+.filter-header {
+    min-height: 38px;
+    margin: 5px 0;
+    background: @color-light;   
+}
+
+.filter-group {
+    margin-bottom: 5px;
+}
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+.filter-dashbar {
+    border-bottom: 1px solid @color-detail; 
+}
+
+.removeable:hover {
+    cursor: pointer;
 }

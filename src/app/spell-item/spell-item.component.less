@@ -16,7 +16,7 @@
         &:not(:last-child) {
             border-right: 1px solid @color-dark;
         }
-        &:nth-child(1):not(.embiggen) {
+        &:nth-child(1):not(.selected) {
             width: 80px;
         }
         &:nth-child(2) {
@@ -35,14 +35,32 @@
     margin: -5px;
     padding: 5px;
 }
-.embiggen {
+.selected {
     font-size: 28px;
     width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    cursor: default;
+    & i:hover {
+        color: @color-dark;
+    }
 }
 .expanded-text {
     padding: 0 20px 10px;
     & > * {
         padding-top: 5px;
         padding-bottom: 5px;
+    }
+}
+i {
+    cursor: pointer;
+}
+.collapse {
+    padding: 3px;
+    width: 100%;
+    &:hover {
+        cursor: pointer;
+        background: @color-light;
     }
 }

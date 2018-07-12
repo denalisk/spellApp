@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Spell } from '../models/spell.interface';
 import { LevelTextPipe } from '../pipes/level-text.pipe';
 import { ClickOutsideDirective } from '../directives/click-outside.directive';
@@ -11,6 +11,7 @@ import { ClickOutsideDirective } from '../directives/click-outside.directive';
 })
 export class SpellItemComponent implements OnInit {
   @Input() spell: Spell;
+  @Output() spellSaved: EventEmitter<void> = new EventEmitter();
 
   public spellDescriptionIsShown: boolean;
 
@@ -25,6 +26,11 @@ export class SpellItemComponent implements OnInit {
 
   public hideSpellDescription(): void {
     this.spellDescriptionIsShown = false;
+  }
+
+  public addSpellToSaved(event: Event): void {
+    event.stopPropagation();
+    this.spellSaved.emit();
   }
 
 }

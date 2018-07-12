@@ -3,12 +3,6 @@ import { FilterFacet } from "../models/filter-facet";
 export const FilterGroups: FilterFacet[][] = [
     [
         {
-            propertyValue: 'Barbarian',
-            propertyName: 'class',
-            displayName: 'Barbarian',
-            selected: false
-        },
-        {
             propertyValue: 'Bard',
             propertyName: 'class',
             displayName: 'Bard',
@@ -18,12 +12,6 @@ export const FilterGroups: FilterFacet[][] = [
             propertyValue: 'Druid',
             propertyName: 'class',
             displayName: 'Druid',
-            selected: false
-        },
-        {
-            propertyValue: 'Monk',
-            propertyName: 'class',
-            displayName: 'Monk',
             selected: false
         },
         {

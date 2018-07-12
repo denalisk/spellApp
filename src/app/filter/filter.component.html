@@ -1,18 +1,25 @@
 
 
 <div (clickOutside)="hideFilters()">
-  <div class="filter-dashbar" (click)="toggleFilterView()">
-    <span class="filter-section">{{ filtersAreShown ? 'Hide Filters' : 'Show Filters' }}</span>
-  </div>
-  <div *ngIf="filtersAreShown" class="filter-contents">
-    <span class="filter-section">Add Filters:</span>
-    <div class="flex-column">
-      <div *ngFor="let filterGroup of filterGroups" class="flex-row-fluid">
-        <div>
-          <!-- <app-select-tag [displayItem]="buildDisplayItem(filterGroup)" [deselector]="sortDeselector" (tagClicked)="toggleFilter($event)"></app-select-tag> -->
-        </div>
-        <div *ngFor="let filter of filterGroup" class="tag-item">
-          <app-select-tag [displayItem]="filter" [deselector]="filterDeselector" (tagClicked)="toggleFilter($event)"></app-select-tag>
+  <div class="filter-dashbar">
+    <div class="flex-row-fluid flex-align filter-header">
+      <div (click)="toggleFilterView()" class="pointer">
+        <i [ngClass]="(filtersAreShown)? 'fa fa-angle-double-up':'fa fa-angle-double-down' " class="fa fa-angle-double-down"></i> 
+        <strong>Filters:</strong> 
+      </div>
+      <div class="tag-item-main removeable" *ngFor="let filter of currentFilters" (click)="removeFilter(filter)">
+        {{ filter.displayName }}
+      </div>
+      <div *ngIf="currentFilters.length === 0" class="de-emphasize">
+        none
+      </div>
+    </div>
+    <div *ngIf="filtersAreShown" class="filter-contents">
+      <div class="flex-column">
+        <div *ngFor="let filterGroup of filterGroups" class="flex-row-fluid filter-group">
+          <div *ngFor="let filter of filterGroup" class="tag-item">
+            <app-select-tag [displayItem]="filter" [deselector]="filterDeselector" (tagClicked)="toggleFilter($event)"></app-select-tag>
+          </div>
         </div>
       </div>
     </div>

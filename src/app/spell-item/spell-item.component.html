@@ -3,8 +3,11 @@
     <div class="flex-0" *ngIf="!spellDescriptionIsShown">
       <strong>{{ spell.level | levelText }}</strong>
     </div>
-    <div [class.embiggen]="spellDescriptionIsShown">
+    <div [class.selected]="spellDescriptionIsShown">
       <strong>{{ spell.name }}</strong>
+      <div *ngIf="spellDescriptionIsShown">
+        <i class="fa fa-plus-square fa-lg" title="Add this spell to your saved spells" (click)="addSpellToSaved($event)"></i>
+      </div>
     </div>
   </div>
   <div *ngIf="spellDescriptionIsShown" class="expanded-text">
@@ -43,6 +46,11 @@
     <div class="flex-row-fluid flex-align">
       <strong>Classes:</strong>
       <div *ngFor="let className of spell.class" class="tag-item-main"> {{ className }}</div>
+    </div>
+    <div title="collapse" class="flex-row flex-align flex-center collapse" (click)="hideSpellDescription()">
+        <i class="fa fa-angle-double-up"></i>
+        <i class="fa fa-angle-double-up"></i>
+        <i class="fa fa-angle-double-up"></i>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -16,6 +16,7 @@ import { FilterComponent } from './filter/filter.component';
 import { SelectTagComponent } from './select-tag/select-tag.component';
 import { FilterService } from './services/filter.service';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -29,12 +30,15 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     ClickOutsideDirective,
     FilterComponent,
     SelectTagComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
     routing,
-    HttpModule
+    HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     SpellService,

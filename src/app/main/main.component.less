@@ -1,0 +1,20 @@
+@import (reference) "../../less/variables.less";
+
+.header-tabs {
+    justify-content: space-between
+}
+.tab {
+    flex-grow: 1;
+    text-align: center;
+    padding: 5px;
+    background: @color-main;
+    color: @color-detail;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.selected {
+    background: @color-dark;
+    color: @color-light;
+    border-bottom: 1px solid @color-main;
+}

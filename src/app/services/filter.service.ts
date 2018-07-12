@@ -6,15 +6,24 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { SpellService } from './spell.service';
 import { Observable } from 'rxjs/Observable';
 import { SpellCardComponent } from '../spell-card/spell-card.component';
+import { AllSpellState, SavedSpellState } from '../constants/stateNames';
 
 @Injectable()
 export class FilterService {
   private allSpells: Spell[];
+  private savedSpells: Spell[];
+  private currentSpellSource: Spell[];
+  private sourceState: string = AllSpellState;
   
   private currentFiltersSubject: BehaviorSubject<FilterFacet[]> = new BehaviorSubject([]);
   public get currentFilters(): Observable<FilterFacet[]> {
     return this.currentFiltersSubject.asObservable();
   };
+
+  private currentSearchQuerySubject: BehaviorSubject<string> = new BehaviorSubject('');
+  public get currentSearchQuery(): Observable<string> {
+    return this.currentSearchQuerySubject.asObservable();
+  }
 
   private currentSpellsSubject: BehaviorSubject<Spell[]> = new BehaviorSubject([]);
   public get currentSpells(): Observable<Spell[]> {
@@ -24,8 +33,30 @@ export class FilterService {
   constructor(private spellService: SpellService) { 
     this.spellService.getAllSpells().then((response: Spell[]) => {
       this.allSpells = response;
+      this.currentSpellSource = this.allSpells;
       this.currentSpellsSubject.next(response);
     });
+    this.savedSpells = [];
+  }
+
+  public toggleSpellSource(newState: string): void {
+    if (newState != this.sourceState) {
+      this.resetFilters();
+      this.resetSearchQuery();
+      this.sourceState = newState;
+      if (this.sourceState === AllSpellState) {
+        this.currentSpellSource = this.allSpells;
+      } else {
+        this.currentSpellSource = this.savedSpells;
+      }
+      this.updateFilters(this.currentFiltersSubject.value);
+    }
+  }
+
+  public addToSavedSpells(spell: Spell): void {
+    if (this.sourceState === AllSpellState) {
+      this.savedSpells.push(spell);
+    }
   }
 
   public addFilter(filter: FilterFacet): void {
@@ -41,11 +72,28 @@ export class FilterService {
     this.updateFilters(currentFilters);
   }
 
+  public updateSearchQuery(query: string): void {
+    this.resetFilters();
+    const lowerQuery = query.toLowerCase();
+    const currentSpells = this.currentSpellSource.filter(spell => spell.name.toLowerCase().includes(lowerQuery));
+    this.updateSpells(currentSpells);
+  }
+
+  private resetSearchQuery(): void {
+    this.currentSearchQuerySubject.next('')
+  }
+
   private updateSpells(newSpells: Spell[]): void {
     this.currentSpellsSubject.next(newSpells);
   }
+
+  private resetFilters(): void {
+    console.log("resetting filters");
+    this.currentFiltersSubject.next([])
+  }
   
   private updateFilters(newFilters: FilterFacet[]): void {
+    this.resetSearchQuery();
     const filterGroups = this.groupFilters(newFilters);
     const spells = this.applyFilters(filterGroups);
     this.updateSpells(spells);
@@ -67,7 +115,7 @@ export class FilterService {
 
   private applyFilters(filterGroups: FilterFacet[][]): Spell[] {
     const filteredSpells: Spell[] = [];
-    this.allSpells.forEach((spell: Spell) => {
+    this.currentSpellSource.forEach((spell: Spell) => {
       if (filterGroups.every(group => group.some(filter => {
         return this.filterSwitch(filter, spell);
       }))) {

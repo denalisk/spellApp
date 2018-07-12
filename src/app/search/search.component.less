@@ -1,0 +1,18 @@
+@import (reference) "../../less/variables.less";
+
+.search-box {
+    position: relative;
+    & input {
+        width: 280px;
+        color: @color-text;
+        padding: 9px 5px;
+        border: 1px solid @color-main; // must match default form gray
+    }
+}
+
+i {
+    position: absolute;
+    top: 9px;
+    left: 270px;
+    color: @color-main;
+}
