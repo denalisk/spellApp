@@ -20,8 +20,11 @@ export class SpellItemComponent implements OnInit {
   }
 
   public toggleSpellDescription(): void {
-    console.log("clicky clicky");
     this.spellDescriptionIsShown = !this.spellDescriptionIsShown;
+  }
+
+  public hideSpellDescription(): void {
+    this.spellDescriptionIsShown = false;
   }
 
 }

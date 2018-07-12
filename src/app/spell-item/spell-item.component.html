@@ -1,34 +1,48 @@
 <div class="spell-item">
   <div class="list-bar flex-row" (click)="toggleSpellDescription()">
-    <div class="flex-0">
-      {{ spell.level | levelText }}
+    <div class="flex-0" *ngIf="!spellDescriptionIsShown">
+      <strong>{{ spell.level | levelText }}</strong>
     </div>
-    <div class="">
-      {{ spell.name }}
+    <div [class.embiggen]="spellDescriptionIsShown">
+      <strong>{{ spell.name }}</strong>
     </div>
-    <div *ngIf="spell.description" class="" [class.truncate]="!spellDescriptionIsShown">
-      <div [innerHTML]="spell.description | safeHtml"></div>
-    </div>
-    <!--     
-      <div *ngIf="spell.range" class="flex-1">
-        Range: {{ spell.range }}
-      </div>
-    <div *ngIf="spell.duration" class="flex-1">
-      Duration: {{ spell.duration }}
-    </div>
-    <div *ngIf="spell.concentration" class="flex-1">
-      Concentration: {{ spell.concentration }} 
-    </div>
-  -->
   </div>
   <div *ngIf="spellDescriptionIsShown" class="expanded-text">
-    <div *ngIf="spell.higherLevel" [innerHTML]="spell.higherLevel | safeHtml">
-
+    <div>
+      <strong>{{ spell.level === 0 ? spell.school + ' ' + (spell.level | levelText) : (spell.level | levelText) + ' ' + spell.school }}</strong>
+    </div>
+    <div *ngIf="spell.range" class="flex-1">
+      <strong>Range:</strong> {{ spell.range }}
+    </div>
+    <div *ngIf="spell.castingTime">
+      <strong>Casting time:</strong> {{ spell.castingTime }}
+    </div>
+    <div *ngIf="spell.duration">
+      <strong>Duration:</strong> {{ spell.duration }}
+    </div>
+    <div *ngIf="spell.concentration">
+      <strong>Concentration:</strong> {{ spell.concentration }}
+    </div>
+    <div *ngIf="spell.components">
+      <strong>Components:</strong> {{ spell.components }}
+    </div>
+    <div *ngIf="spell.material">
+      <strong>Material:</strong> {{ spell.material }}
+    </div>
+    <div *ngIf="spell.ritual">
+      <strong>Ritual:</strong> {{ spell.ritual }}
+    </div>
+    <div class="description">
+      <strong>Description:</strong>
+      <div *ngIf="spell.description" [innerHTML]="spell.description | safeHtml"></div>
+      <div *ngIf="spell.higherLevel" [innerHTML]="spell.higherLevel | safeHtml"></div>
+    </div>
+    <div *ngIf="spell.page">
+      <strong>Source:</strong> {{ spell.page }}
+    </div>
+    <div class="flex-row-fluid flex-align">
+      <strong>Classes:</strong>
+      <div *ngFor="let className of spell.class" class="tag-item-main"> {{ className }}</div>
     </div>
   </div>
-  <!-- 
-    <div *ngIf="spell.castingTime" class="flex-1">
-      {{ spell.castingTime }}
-    </div>
-   -->
 </div>
