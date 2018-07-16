@@ -17,10 +17,21 @@ export class SpellService {
     .map(response => response.json() as T[]);
   }
 
+  // public getAllSpells(): Promise<Spell[]> {
+  //   return this.http.get('http://localhost:3000/spells')
+  //   .map(response => {
+  //     let spells = response.json() as Spell[];
+  //     this.sortSpells(spells);
+  //     return spells;
+  //   }).toPromise();
+  // }
+
   public getAllSpells(): Promise<Spell[]> {
-    return this.http.get('http://localhost:3000/spells')
+    console.log("getting spells");
+    return this.http.get('assets/data.json')
     .map(response => {
-      let spells = response.json() as Spell[];
+      const parsedResponse = response.json();
+      let spells = parsedResponse.spells as Spell[];
       this.sortSpells(spells);
       return spells;
     }).toPromise();
