@@ -37,6 +37,12 @@ export const FilterGroups: FilterFacet[][] = [
             propertyName: 'class',
             displayName: 'Warlock',
             selected: false
+        },
+        {
+            propertyValue: 'Wizard',
+            propertyName: 'class',
+            displayName: 'Wizard',
+            selected: false
         }
     ],
     [
