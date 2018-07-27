@@ -1,3 +1,5 @@
+import { UserData } from "./userData";
+
 export interface Spell {
     id: number
     name: string;
@@ -15,6 +17,10 @@ export interface Spell {
     level: number;
     school: string;
     class: string[];
+}
+
+export interface UserSpell extends Spell {
+    userData: UserData;
 }
 
 export interface PreSpell {

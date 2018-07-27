@@ -9,6 +9,12 @@ export const FilterGroups: FilterFacet[][] = [
             selected: false
         },
         {
+            propertyValue: 'Cleric',
+            propertyName: 'class',
+            displayName: 'Cleric',
+            selected: false
+        },
+        {
             propertyValue: 'Druid',
             propertyName: 'class',
             displayName: 'Druid',

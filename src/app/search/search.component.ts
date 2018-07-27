@@ -15,6 +15,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Output() searchChanged: EventEmitter<string> = new EventEmitter();
   public searchBox: FormControl;
 
+  private currentSearchValue: string;
+
   constructor(private filterService: FilterService) {
     this.searchBox = new FormControl('');
   }
@@ -26,8 +28,13 @@ export class SearchComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .subscribe(value => {
         this.updateSearchQuery(value);
+        this.currentSearchValue = value;
       });
     this.initSearyQuerySubscription();
+  }
+
+  public executeSearch(): void {
+    this.updateSearchQuery(this.currentSearchValue);
   }
 
   private ngUnsubscribe: Subject<void> = new Subject();
@@ -45,6 +52,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .subscribe(query => {
         this.searchBox.patchValue(query);
+        this.currentSearchValue = query;
       })
   }
 }
